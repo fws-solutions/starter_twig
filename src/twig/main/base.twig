@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="profile" href="https://gmpg.org/xfn/11">
+    <link rel="icon" type="image/png" href="/favicon.png"/>
+    <meta name="description" content="">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="author" href="/humans.txt"/>
+    <link rel="stylesheet" href="/css/style.min.css">
+
+    <script type="text/javascript" src="/js/site.min.js" defer></script>
+
+    <title>Site Title</title>
+    <meta name='robots' content='noindex,follow'/>
+</head>
+
+<body>
+<div id="page" class="site">
+    <a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+    {% include 'header/header.twig' with header only %}
+
+    <div id="content" class="site-content">
+        <div id="primary" class="content-area">
+            <main id="main" class="site-main" role="main">
+                {% block content %}
+                    Sorry, no content
+                {% endblock %}
+            </main>
+        </div>
+    </div>
+
+    {% include 'footer/footer.twig' with footer only %}
+</div>
+</body>
+</html>

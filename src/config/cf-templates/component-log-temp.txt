@@ -1,0 +1,15 @@
+
+------------------------------------------------------------------------
+
+    CREATED COMPONENT -------------------------------------- @{str}
+
+
+    - created TWIG file: '@{str}.twig' in dir 'src/twig/components/@{str}'
+
+    - created JSON file: '@{str}.json' in dir 'src/twig/components/@{str}'
+
+    - created SCSS file: '_@{str}.scss' in dir 'src/twig/components/@{str}'
+
+    - updated SCSS file: '_components.scss' in dir 'src/scss/layout'
+
+------------------------------------------------------------------------

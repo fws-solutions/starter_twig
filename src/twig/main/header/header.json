@@ -1,0 +1,17 @@
+{
+  "logo": "/assets/images/logo.png",
+  "menu": [
+    {
+      "name": "Home",
+      "url": "javascript:;"
+    },
+    {
+      "name": "About us",
+      "url": "javascript:;"
+    },
+    {
+      "name": "Contacts us",
+      "url": "javascript:;"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "header": {
+    ">>": "main/header/header.json"
+  },
+  "footer": {
+    ">>": "main/footer/footer.json"
+  },
+  "teamList": {
+    ">>": "components/team-list/team-list.json"
+  }
+}

@@ -1,1 +1,15 @@
-# Add any directories, files, or patterns you don't want to be tracked by version control
+# ignore log files
+*.log
+
+# ignore compiled files
+dist
+.sass-cache
+
+# ignore Editor files
+.idea
+.vscode
+index.sublime-workspace
+.sublime-gulp.cache
+
+# ignore node_modules
+node_modules

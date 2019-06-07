@@ -1,0 +1,13 @@
+
+------------------------------------------------------------------------
+
+    CREATED PARTIAL -------------------------------------- @{str}
+
+
+    - created TWIG file: '@{str}.twig' in dir 'src/twig/partials/@{str}'
+
+    - created SCSS file: '_@{str}.scss' in dir 'src/twig/partials/@{str}'
+
+    - updated SCSS file: '_partials.scss' in dir 'src/scss/layout'
+
+------------------------------------------------------------------------
