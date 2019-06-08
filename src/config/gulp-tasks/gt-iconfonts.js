@@ -106,7 +106,7 @@ const saveSvgFiles = (filepath, data) => {
 	});
 };
 
-gulp.task('fonticons', function () {
+gulp.task('fonticons', function (done) {
 	fs.readdirSync(svgPath).forEach((file, i, allFiles) => {
 		const filePath = path.join(svgPath, file);
 
@@ -138,7 +138,8 @@ gulp.task('fonticons', function () {
 	// build font icons when all optimization functions are done
 	Promise.all(optimizeSVGs)
 		.then(() => {
-			gulp.start('fonticons-build');
+			buildFontIcons();
+			done();
 		})
 		.catch(error => {
 			console.log(error);
@@ -146,13 +147,13 @@ gulp.task('fonticons', function () {
 });
 
 // generate font icons from SVGs
-gulp.task('fonticons-build', function () {
+function buildFontIcons() {
 	return gulp.src([`${svgPath}/*.svg`])
 		.pipe(iconfontCss({
 			fontName: 'fonticons',
 			cssClass: 'font',
 			path: 'src/config/icon-font.scss',
-			targetPath: inputPath.replace('config\\gulp-tasks', 'sass') + '/base/_icon-font.scss',
+			targetPath: '../../sass/base/_icon-font.scss',
 			fontPath: 'src/assets/icons/'
 		}))
 		.pipe(iconfont({
@@ -186,4 +187,4 @@ gulp.task('fonticons-build', function () {
 			globalVars.logMSG(globalVars.warningTemp, glyphsReport, 'green');
 		})
 		.pipe(gulp.dest('src/assets/icons/'));
-});
+}
