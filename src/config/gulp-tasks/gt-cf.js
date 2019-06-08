@@ -8,7 +8,7 @@ const globalVars = require('./_global-vars');
  ----------------------------------------------------------------------------------------------*/
 function createFiles(arg, type) {
 	const part = type === 'main' ? 'main' : `${type}s`;
-	let directory = `twig-parts/${part}/${arg}`;
+	let directory = `src/twig/${part}/${arg}`;
 
 	function create(file) {
 		let temp = `${type}-twig-temp.txt`;
@@ -56,7 +56,7 @@ function createFiles(arg, type) {
 	}
 }
 
-gulp.task('cf', function() {
+gulp.task('cf', function(done) {
 	if (argv.page && typeof argv.page === 'string') {
 		// create page TWIG and JSON files
 		createFiles(argv.page.toLowerCase(), 'page');
@@ -72,4 +72,6 @@ gulp.task('cf', function() {
 	} else {
 		globalVars.logMSG(globalVars.warningTemp, 'ERROR: no parameters were passed');
 	}
+
+	done();
 });
