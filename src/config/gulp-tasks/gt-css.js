@@ -17,7 +17,7 @@ const sassSRC = ['src/sass/**/*.scss', 'src/twig/**/**/*.scss'];
 // compile scss files
 gulp.task('css', function () {
 	const processors = [
-		autoprefixer({browsers: ['last 2 versions', 'ios >= 8']}),
+		autoprefixer({overrideBrowserslist: ['last 2 versions', 'ios >= 8']}),
 		flexBugsFix
 	];
 
