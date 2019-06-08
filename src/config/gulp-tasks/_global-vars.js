@@ -31,7 +31,7 @@ module.exports = {
 			console.log('\x1b[37m');
 		});
 	},
-	createDistFolder() {
+	createDistFolder(done) {
 		if (!fs.existsSync('dist')) {
 			fs.mkdirSync('./dist');
 		}
@@ -41,5 +41,7 @@ module.exports = {
 		if (!fs.existsSync('dist/assets/images')) {
 			fs.mkdirSync('./dist/assets/images');
 		}
+
+		done();
 	}
 };

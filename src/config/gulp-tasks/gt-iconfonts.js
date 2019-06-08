@@ -106,7 +106,7 @@ const saveSvgFiles = (filepath, data) => {
 	});
 };
 
-gulp.task('fonticons', function (done) {
+function fonticons(done) {
 	fs.readdirSync(svgPath).forEach((file, i, allFiles) => {
 		const filePath = path.join(svgPath, file);
 
@@ -144,7 +144,9 @@ gulp.task('fonticons', function (done) {
 		.catch(error => {
 			console.log(error);
 		});
-});
+}
+
+gulp.task('fonticons', fonticons);
 
 // generate font icons from SVGs
 function buildFontIcons() {

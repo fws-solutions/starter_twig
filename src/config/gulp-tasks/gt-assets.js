@@ -2,20 +2,15 @@ const gulp = require('gulp');
 const tap = require('gulp-tap');
 const path = require('path');
 const fs = require('fs');
-const runSequence = require('gulp4-run-sequence');
 const globalVars = require('./_global-vars');
 
 /*----------------------------------------------------------------------------------------------
 	Assets Files
  ----------------------------------------------------------------------------------------------*/
-gulp.task('assets', function (done) {
-	runSequence('assets-img-prep', 'assets-img-sync', 'assets-fonts');
-
-	done();
-});
+gulp.task('assets', gulp.series(assetsImgPrep, assetsImgSync, assetsFonts));
 
 // copy fonts
-gulp.task('assets-fonts', function (done) {
+function assetsFonts(done) {
 	const distAssetsPath = 'dist/assets/fonts';
 	const srcAssetsPath = 'src/assets/fonts';
 	const distAssets = fs.existsSync(distAssetsPath) ? fs.readdirSync(distAssetsPath) : [];
@@ -33,10 +28,10 @@ gulp.task('assets-fonts', function (done) {
 	}
 
 	done();
-});
+}
 
 // prepare images
-gulp.task('assets-img-prep', function () {
+function assetsImgPrep() {
 	return gulp.src('dist/assets/images/**')
 		.pipe(tap(function (file) {
 			const fileStat = fs.lstatSync(file.path);
@@ -45,10 +40,10 @@ gulp.task('assets-img-prep', function () {
 				globalVars.distAssets[path.basename(file.path).trim()] = fileStat.mtimeMs;
 			}
 		}));
-});
+}
 
 // copy images
-gulp.task('assets-img-sync', function () {
+function assetsImgSync() {
 	return gulp.src('src/assets/images/**')
 		.pipe(tap(function (file) {
 			const assetPath = 'src/' + path.relative('./src/', file.path).split(path.sep).join('/');
@@ -70,4 +65,11 @@ gulp.task('assets-img-sync', function () {
 				}
 			}
 		}));
-});
+}
+
+// export tasks
+module.exports = {
+	assetsImgPrep: assetsImgPrep,
+	assetsImgSync: assetsImgSync,
+	assetsFonts: assetsFonts
+};

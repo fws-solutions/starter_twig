@@ -15,7 +15,10 @@ const globalVars = require('./_global-vars');
 const sassSRC = ['src/sass/**/*.scss', 'src/twig/**/**/*.scss'];
 
 // compile scss files
-gulp.task('css', function () {
+gulp.task('css', css);
+gulp.task('sass-lint', sasslint);
+
+function css() {
 	const processors = [
 		autoprefixer({overrideBrowserslist: ['last 2 versions', 'ios >= 8']}),
 		flexBugsFix
@@ -29,13 +32,18 @@ gulp.task('css', function () {
 		.pipe(rename('style.min.css'))
 		.pipe(sourcemaps.write('.'))
 		.pipe(gulp.dest('dist/css'));
-});
+}
 
-gulp.task('sass-lint', function () {
+function sasslint() {
 	return gulp.src(['src/sass/**/*.scss', 'src/twig/**/**/*.scss'])
 		.pipe(sassLint({
 			config: '.sass-lint.yml'
 		}))
 		.pipe(sassLint.format())
 		.pipe(sassLint.failOnError());
-});
+}
+
+// export tasks
+module.exports = {
+	css: css
+};

@@ -60,13 +60,17 @@ function checkForIncludedJson(object) {
 }
 
 // delete all html files from dist
-gulp.task('clean-html', function () {
+gulp.task('clean-html', cleanHTML);
+
+function cleanHTML() {
 	return gulp.src('dist/**/*.html', {read: false})
 		.pipe(clean());
-});
+}
 
 // build twig files
-gulp.task('twig', function () {
+gulp.task('twig', compileTWIG);
+
+function compileTWIG() {
 	return gulp.src(['./src/twig/pages/**/*.twig'])
 		.pipe(plumber())
 		.pipe(data(function (file) {
@@ -105,4 +109,10 @@ gulp.task('twig', function () {
 		.pipe(gulpif(globalVars.productionBuild, prettify({indent_char: '	', indent_size: 1})))
 		.pipe(print())
 		.pipe(gulp.dest('dist'));
-});
+}
+
+// export tasks
+module.exports = {
+	compileTWIG: compileTWIG,
+	cleanHTML: cleanHTML
+};

@@ -31,9 +31,7 @@
     "gulp-tap": "^1.0.1",
     "gulp-twig": "^1.2.0",
     "gulp-uglify-es": "^1.0.4",
-    "gulp4-run-sequence": "^0.3.3",
     "postcss-flexbugs-fixes": "^4.1.0",
-    "require-dir": "^1.2.0",
     "svgo": "^1.2.2",
     "webpack-stream": "^5.2.1",
     "yargs": "^13.2.4"

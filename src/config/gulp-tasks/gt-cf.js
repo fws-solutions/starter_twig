@@ -29,7 +29,7 @@ function createFiles(arg, type) {
 		const readDir = file === 'style' ? styleSRC : `src/config/cf-templates/${temp}`;
 		const writeDir = file === 'style' ? styleSRC : `${directory}/${filename}`;
 
-		globalVars.rf(readDir, function(data) {
+		globalVars.rf(readDir, function (data) {
 			const output = file === 'style' ? (data + `\n@import '../../twig/${part}/${arg}/${arg}';`) : data.replace(new RegExp(`@{${type}}`, 'g'), arg);
 			fs.writeFileSync(writeDir, output);
 		});
@@ -56,7 +56,7 @@ function createFiles(arg, type) {
 	}
 }
 
-gulp.task('cf', function(done) {
+function cf(done) {
 	if (argv.page && typeof argv.page === 'string') {
 		// create page TWIG and JSON files
 		createFiles(argv.page.toLowerCase(), 'page');
@@ -74,4 +74,6 @@ gulp.task('cf', function(done) {
 	}
 
 	done();
-});
+}
+
+gulp.task('cf', cf);
