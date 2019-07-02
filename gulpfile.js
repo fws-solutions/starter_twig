@@ -38,7 +38,7 @@ gulp.task('build', gulp.series(
 		gulp.series(gtTwig.cleanHTML, gtTwig.compileTWIG),
 		gtCss.css,
 		gulp.series(gtJs.siteJS, gtJs.libsJS, gtJs.pluginsJS, gtJs.mergeJS, gtJs.cleanJS),
-		gulp.series(gtAssets.assetsImgPrep, gtAssets.assetsImgSync, gtAssets.assetsFonts)
+		gulp.series(gtAssets.assetsImgPrep, gtAssets.assetsImgSync, gtAssets.assetsFontsAndIcons)
 	)
 ));
 
@@ -51,7 +51,7 @@ gulp.task('build-dev', gulp.series(
 		gtTwig.compileTWIG,
 		gtCss.css,
 		gulp.series(gtJs.siteJS, gtJs.libsJS, gtJs.pluginsJS, gtJs.mergeJS, gtJs.cleanJS),
-		gulp.series(gtAssets.assetsImgPrep, gtAssets.assetsImgSync, gtAssets.assetsFonts)
+		gulp.series(gtAssets.assetsImgPrep, gtAssets.assetsImgSync, gtAssets.assetsFontsAndIcons)
 	)
 ));
 
@@ -69,7 +69,7 @@ gulp.task('watch', gulp.series(
 		gtTwig.compileTWIG,
 		gtCss.css,
 		gulp.series(gtJs.siteJS, gtJs.libsJS, gtJs.pluginsJS, gtJs.mergeJS, gtJs.cleanJS),
-		gulp.series(gtAssets.assetsImgPrep, gtAssets.assetsImgSync, gtAssets.assetsFonts)
+		gulp.series(gtAssets.assetsImgPrep, gtAssets.assetsImgSync, gtAssets.assetsFontsAndIcons)
 	),
 	gtWatch.watchFiles,
 	gtServer.runServer

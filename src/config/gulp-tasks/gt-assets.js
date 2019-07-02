@@ -7,16 +7,20 @@ const globalVars = require('./_global-vars');
 /*----------------------------------------------------------------------------------------------
 	Assets Files
  ----------------------------------------------------------------------------------------------*/
-gulp.task('assets', gulp.series(assetsImgPrep, assetsImgSync, assetsFonts));
+gulp.task('assets', gulp.series(assetsImgPrep, assetsImgSync, assetsFontsAndIcons));
 
 // copy fonts
-function assetsFonts(done) {
-	const distAssetsPath = 'dist/assets/fonts';
-	const srcAssetsPath = 'src/assets/fonts';
+function assetsFontsAndIcons(done) {
+	assetsFontFiles('dist/assets/fonts', 'src/assets/fonts');
+	assetsFontFiles('dist/assets/icons', 'src/assets/icons');
+	done();
+}
+
+function assetsFontFiles(distAssetsPath, srcAssetsPath) {
 	const distAssets = fs.existsSync(distAssetsPath) ? fs.readdirSync(distAssetsPath) : [];
 
-	if (!fs.existsSync('dist/assets/fonts')) {
-		fs.mkdirSync('./dist/assets/fonts');
+	if (!fs.existsSync(distAssetsPath)) {
+		fs.mkdirSync('./' + distAssetsPath);
 	}
 
 	if (fs.existsSync(srcAssetsPath)) {
@@ -26,8 +30,6 @@ function assetsFonts(done) {
 			}
 		});
 	}
-
-	done();
 }
 
 // prepare images
@@ -71,5 +73,5 @@ function assetsImgSync() {
 module.exports = {
 	assetsImgPrep: assetsImgPrep,
 	assetsImgSync: assetsImgSync,
-	assetsFonts: assetsFonts
+	assetsFontsAndIcons: assetsFontsAndIcons
 };
