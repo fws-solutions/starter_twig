@@ -52,7 +52,6 @@
 		"sections": [
 			{
 				"title": "Example Section",
-				"id": "section-3",
 				"twig": "../twig/components/team-list/team-list.twig",
 				"json": {
 					">>": "components/team-list/team-list.json"
