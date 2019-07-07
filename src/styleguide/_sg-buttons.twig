@@ -1,0 +1,11 @@
+{% extends "_sg-section-wrap.twig" %}
+
+{% block sgContent %}
+	<div class="styleguide__buttons">
+		{% for btn in buttons %}
+			<div class="styleguide__btn">
+				<a href="javascript:;" class="{{ btn.class }}">{{ btn.text }}</a>
+			</div>
+		{% endfor %}
+	</div>
+{% endblock %}

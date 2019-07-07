@@ -70,8 +70,10 @@ function cleanHTML() {
 // build twig files
 gulp.task('twig', compileTWIG);
 
+const twigSRC = ['./src/twig/pages/**/*.twig', './src/styleguide/styleguide.twig'];
+
 function compileTWIG() {
-	return gulp.src(['./src/twig/pages/**/*.twig'])
+	return gulp.src(twigSRC)
 		.pipe(plumber())
 		.pipe(data(function (file) {
 			const src = './src/';

@@ -13,6 +13,7 @@ files:
     - 'src/sass/bootstrap/_grid-framework.scss'
     - 'src/sass/bootstrap/_grid-layout.scss'
     - 'src/sass/bootstrap/_grid.scss'
+    - 'src/sass/plugins/*.scss'
 
 rules:
   attribute-quotes: 2

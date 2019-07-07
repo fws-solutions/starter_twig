@@ -65,6 +65,11 @@ Nicolas Gallagher and Jonathan Neal http://necolas.github.io/normalize.css/
 @import 'base/layout';
 
 /*--------------------------------------------------------------
+# Plugins
+--------------------------------------------------------------*/
+@import 'plugins/slick';
+
+/*--------------------------------------------------------------
 # Parts
 --------------------------------------------------------------*/
 @import 'parts/buttons';
@@ -74,7 +79,7 @@ Nicolas Gallagher and Jonathan Neal http://necolas.github.io/normalize.css/
 /*--------------------------------------------------------------
 # Main
 --------------------------------------------------------------*/
-@import 'main/site-styleguide';
+@import '../styleguide/styleguide';
 @import 'main/site-navigation';
 @import 'main/site-404';
 

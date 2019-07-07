@@ -1,13 +1,13 @@
 <div class="team-list">
-    <div class="wrap">
-        <h2>{{ title }}</h2>
+	<div class="wrap">
+		<h2>{{ title }}</h2>
 
-        {% if people %}
-            <ul>
-                {% for p in people %}
-                    <li>{{ p.name }} {{ p.surname }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-    </div>
+		{% if people %}
+			<ul>
+				{% for p in people %}
+					<li>{{ p.name }} {{ p.surname }}</li>
+				{% endfor %}
+			</ul>
+		{% endif %}
+	</div>
 </div><!-- .team-list -->

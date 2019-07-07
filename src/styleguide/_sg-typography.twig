@@ -1,0 +1,31 @@
+{% extends "_sg-section-wrap.twig" %}
+
+{% block sgContent %}
+	<div class="col-md-6">
+		<div class="styleguide__typography-special-titles">
+			<h3 class="styleguide__subtitle">Special Titles</h3>
+
+			{% for title in titles %}
+				<span class="{{ title.class }}">{{ title.text }}</span>
+			{% endfor %}
+		</div>
+
+		<div class="typography__headings">
+			<h3 class="styleguide__subtitle">Entry Content: Headings</h3>
+			<div class="entry-content">
+				<h1>H1 - Some Title</h1>
+				<h2>H2 - Some Title</h2>
+				<h3>H3 - Some Title</h3>
+				<h4>H4 - Some Title</h4>
+				<h5>H5 - Some Title</h5>
+				<h6>H6 - Some Title</h6>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-6">
+		<h3 class="styleguide__subtitle">Entry Content: Elements</h3>
+
+		{% include '_sg-entry-content.twig' %}
+	</div>
+{% endblock %}
