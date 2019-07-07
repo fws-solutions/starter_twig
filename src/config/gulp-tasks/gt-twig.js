@@ -9,6 +9,7 @@ const data = require('gulp-data');
 const prettify = require('gulp-html-prettify');
 const clean = require('gulp-clean');
 const rename = require('gulp-rename');
+const htmlValidator = require('gulp-w3c-html-validator');
 const globalVars = require('./_global-vars');
 
 
@@ -113,8 +114,20 @@ function compileTWIG() {
 		.pipe(gulp.dest('dist'));
 }
 
+
+
+// Tasks
+gulp.task('validate-html', validateHtml);
+
+function validateHtml() {
+	return gulp.src('dist/**/*.html')
+		.pipe(htmlValidator())
+		.pipe(htmlValidator.reporter());
+}
+
 // export tasks
 module.exports = {
 	compileTWIG: compileTWIG,
-	cleanHTML: cleanHTML
+	cleanHTML: cleanHTML,
+	validateHtml: validateHtml
 };

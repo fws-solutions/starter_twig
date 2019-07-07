@@ -35,7 +35,7 @@ gulp.task('build', gulp.series(
 	prodBuild,
 	copyFavicon,
 	gulp.parallel(
-		gulp.series(gtTwig.cleanHTML, gtTwig.compileTWIG),
+		gulp.series(gtTwig.cleanHTML, gtTwig.compileTWIG, gtTwig.validateHtml),
 		gtCss.css,
 		gulp.series(gtJs.siteJS, gtJs.libsJS, gtJs.pluginsJS, gtJs.mergeJS, gtJs.cleanJS),
 		gulp.series(gtAssets.assetsImgPrep, gtAssets.assetsImgSync, gtAssets.assetsFontsAndIcons)
@@ -48,7 +48,7 @@ gulp.task('build-dev', gulp.series(
 	devBuild,
 	copyFavicon,
 	gulp.parallel(
-		gtTwig.compileTWIG,
+		gulp.series(gtTwig.compileTWIG, gtTwig.validateHtml),
 		gtCss.css,
 		gulp.series(gtJs.siteJS, gtJs.libsJS, gtJs.pluginsJS, gtJs.mergeJS, gtJs.cleanJS),
 		gulp.series(gtAssets.assetsImgPrep, gtAssets.assetsImgSync, gtAssets.assetsFontsAndIcons)
@@ -66,7 +66,7 @@ gulp.task('watch', gulp.series(
 	globalVars.createDistFolder,
 	devBuild,
 	gulp.parallel(
-		gtTwig.compileTWIG,
+		gulp.series(gtTwig.compileTWIG, gtTwig.validateHtml),
 		gtCss.css,
 		gulp.series(gtJs.siteJS, gtJs.libsJS, gtJs.pluginsJS, gtJs.mergeJS, gtJs.cleanJS),
 		gulp.series(gtAssets.assetsImgPrep, gtAssets.assetsImgSync, gtAssets.assetsFontsAndIcons)
