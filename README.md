@@ -30,18 +30,18 @@ To start *watch mode* and *local server*, execute `gulp watch` task.
 
 ### Creating Parts
 
-To create a new part, execute `gulp cf` task and pass `-main`, `-component` or `-partial` with an argument.
+To create a new part, execute `gulp cf` task and pass `--main`, `--component` or `--partial` with an argument.
 
-    gulp cf -main main-name
-    gulp cf -component component-name
-    gulp cf -partial partial-name
+    gulp cf --main main-name
+    gulp cf --component component-name
+    gulp cf --partial partial-name
 
 This command will create new module files in appropriate directory `src/twig/main`, `src/twig/components` or `src/twig/partial`:
 * .twig
 * .json
 * .scss
 
-It will also update appropriate scss file `main.scss`, `components.scss` or `partials.scss` in `src/sass/layout` directory.
+It will also update appropriate scss file `_main.scss`, `_components.scss` or `_partials.scss` in `src/sass/layout` directory.
 
 
 ### Creating a Page
