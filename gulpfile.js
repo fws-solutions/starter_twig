@@ -1,17 +1,15 @@
 const gulp = require('gulp');
 const fs = require('fs');
 const clean = require('gulp-clean');
-const globalVars = require('./src/config/gulp-tasks/_global-vars');
+const globalVars = require('./src/config/gulp/_global-vars');
 
 // import gulp parts
-require('./src/config/gulp-tasks/gt-iconfonts');
-require('./src/config/gulp-tasks/gt-cf');
-const gtTwig = require('./src/config/gulp-tasks/gt-twig');
-const gtCss = require('./src/config/gulp-tasks/gt-css');
-const gtJs = require('./src/config/gulp-tasks/gt-js');
-const gtAssets = require('./src/config/gulp-tasks/gt-assets');
-const gtWatch = require('./src/config/gulp-tasks/gt-watch');
-const gtServer = require('./src/config/gulp-tasks/gt-server');
+const gtTwig = require('./src/config/gulp/gt-twig');
+const gtCss = require('./src/config/gulp/gt-css');
+const gtJs = require('./src/config/gulp/gt-js');
+const gtAssets = require('./src/config/gulp/gt-assets');
+const gtWatch = require('./src/config/gulp/gt-watch');
+const gtServer = require('./src/config/gulp/gt-server');
 
 // prepare for build
 function prodBuild(done) {
