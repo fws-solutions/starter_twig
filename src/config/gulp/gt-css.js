@@ -12,7 +12,7 @@ const globalVars = require('./_global-vars');
 /*----------------------------------------------------------------------------------------------
 	SCSS
  ----------------------------------------------------------------------------------------------*/
-const sassSRC = ['src/assets/sass/**/*.scss', 'src/components/**/**/*.scss'];
+const sassSRC = ['src/assets/scss/**/*.scss', 'src/components/**/**/*.scss'];
 
 // compile scss files
 gulp.task('css', css);
