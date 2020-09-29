@@ -25,12 +25,12 @@ const ExampleFile = {
 	/*-------------------------------------------------------------------------------
 		# Initialize
 	-------------------------------------------------------------------------------*/
-	init: function () {
+	init: function() {
 		this.bindEvents();
 	},
 
-	bindEvents: function () {
-		this.$domExampleSelector.on('click', function () {
+	bindEvents: function() {
+		this.$domExampleSelector.on('click', function() {
 			/* When keyword 'this' is no longer pointing to the main object, like in this scenario,
 			   please use the variable name of the main object in order to access it (in an example below we are using 'ExampleFile.someFunction()' instead of 'this.someFunction()').
 			 */
@@ -39,7 +39,7 @@ const ExampleFile = {
 		});
 	},
 
-	someFunction: function (selector) {
+	someFunction: function(selector) {
 		const ww = Global.varsWindowWidth; // this variable is called from global.js file
 		const something = selector.attr(this.attrExampleDataAttr);
 

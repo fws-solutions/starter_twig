@@ -7,13 +7,13 @@ gulp.task('watch-files', watchFiles);
 
 function watchFiles(done) {
 	// watch .scss files
-	gulp.watch(['src/sass/**/*.scss', 'src/twig/**/**/*.scss'], gulp.parallel(['css', 'sass-lint']));
+	gulp.watch(['src/assets/sass/**/*.scss', 'src/twig/**/**/*.scss'], gulp.parallel(['css', 'sass-lint']));
 
 	// watch .js files
-	gulp.watch('src/js/**/*.js', gulp.series('js'));
+	gulp.watch('src/assets/js/**/*.js', gulp.series('js'));
 
 	// watch .twig and .json files
-	gulp.watch(['src/twig/**/**/*.twig', 'src/twig/**/**/*.json'], gulp.series('twig'));
+	gulp.watch(['src/components/**/**/*.twig', 'src/components/**/**/*.json'], gulp.series('twig'));
 
 	done();
 }

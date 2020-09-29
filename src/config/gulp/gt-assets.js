@@ -34,7 +34,7 @@ function assetsFontFiles(distAssetsPath, srcAssetsPath) {
 // prepare images
 function assetsImgPrep() {
 	return gulp.src('dist/assets/images/**')
-		.pipe(tap(function (file) {
+		.pipe(tap(function(file) {
 			const fileStat = fs.lstatSync(file.path);
 
 			if (!fileStat.isDirectory()) {
@@ -46,7 +46,7 @@ function assetsImgPrep() {
 // copy images
 function assetsImgSync() {
 	return gulp.src('src/assets/images/**')
-		.pipe(tap(function (file) {
+		.pipe(tap(function(file) {
 			const assetPath = 'src/' + path.relative('./src/', file.path).split(path.sep).join('/');
 			const fileStat = fs.lstatSync(file.path);
 

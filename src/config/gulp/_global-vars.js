@@ -13,7 +13,7 @@ module.exports = {
 		})
 	},
 	rf(src, callback) {
-		fs.readFile(src, 'utf8', function (err, data) {
+		fs.readFile(src, 'utf8', function(err, data) {
 			if (!err) {
 				callback(data);
 			} else {
@@ -22,7 +22,7 @@ module.exports = {
 		});
 	},
 	logMSG(template, str, color = 'yellow') {
-		module.exports.rf(template, function (data) {
+		module.exports.rf(template, function(data) {
 			data = data.replace(new RegExp('@{str}', 'g'), str);
 			color = color === 'yellow' ? '\x1b[33m' : '\x1b[32m';
 

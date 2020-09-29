@@ -15,13 +15,13 @@ const globalVars = require('./_global-vars');
 /*----------------------------------------------------------------------------------------------
 	TWIG
  ----------------------------------------------------------------------------------------------*/
-const ComponentData = function (prop, src) {
+const ComponentData = function(prop, src) {
 	this.prop = prop;
 	this.src = src;
 };
 
 ComponentData.prototype = {
-	addOverrides: function () {
+	addOverrides: function() {
 		this.overrides = {};
 	}
 };
@@ -75,7 +75,7 @@ const twigSRC = ['./src/pages/**/*.twig'];
 function compileTWIG() {
 	return gulp.src(twigSRC)
 		.pipe(plumber())
-		.pipe(data(function (file) {
+		.pipe(data(function(file) {
 			const src = './src/';
 			const dir = path.relative('./src/', file.path).split(path.sep).slice(0, -1).join('/');
 			const name = path.basename(file.path).replace('.twig', '') + '.json';
@@ -85,7 +85,7 @@ function compileTWIG() {
 
 			// check if there's included data in json
 			if (includedJson.length > 0) {
-				includedJson.forEach(function (cur) {
+				includedJson.forEach(function(cur) {
 					const data = JSON.parse(fs.readFileSync(cur.src));
 
 					// check if there are override properties for included data
@@ -104,7 +104,7 @@ function compileTWIG() {
 			return fileData;
 		}))
 		.pipe(twig())
-		.on('error', function (err) {
+		.on('error', function(err) {
 			process.stderr.write(err.message + '\n');
 			this.emit('end');
 		})
@@ -112,7 +112,6 @@ function compileTWIG() {
 		.pipe(print())
 		.pipe(gulp.dest('dist'));
 }
-
 
 
 // Tasks

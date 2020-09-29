@@ -1,7 +1,7 @@
 import Menu from './_site/menu';
 import Sliders from './_site/sliders';
 
-jQuery(function () {
+jQuery(function() {
 	Menu.init();
 	Sliders.init();
 });

@@ -1,19 +1,19 @@
 <header class="header">
-    <div class="wrap">
-        <div class="header__container">
-            <a href="/" class="header__home"> <img src="{{ logo }}" alt="" class="header__logo"/> </a>
+	<div class="wrap">
+		<div class="header__container">
+			<a href="/" class="header__home"> <img src="{{ logo }}" alt="" class="header__logo"/> </a>
 
-            {% if menu %}
-                <nav class="main-nav">
-                    <ul class="main-nav__list" role="menubar">
-                        {% for item in menu %}
-                            <li class="main-nav__list-item" role="menuitem">
-                                <a href="{{ item.url }}" class="main-nav__list-link">{{ item.name }}</a>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </nav>
-            {% endif %}
-        </div>
-    </div>
+			{% if menu %}
+				<nav class="main-nav">
+					<ul class="main-nav__list" role="menubar">
+						{% for item in menu %}
+							<li class="main-nav__list-item" role="menuitem">
+								<a href="{{ item.url }}" class="main-nav__list-link">{{ item.name }}</a>
+							</li>
+						{% endfor %}
+					</ul>
+				</nav>
+			{% endif %}
+		</div>
+	</div>
 </header><!-- .header -->

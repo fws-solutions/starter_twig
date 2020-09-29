@@ -15,7 +15,7 @@ const Menu = {
 	/*-------------------------------------------------------------------------------
 		# Initialize
 	-------------------------------------------------------------------------------*/
-	init: function () {
+	init: function() {
 		// functions
 		function closeNav() {
 			Menu.$domMenuBtn.removeClass(Menu.classOpen);
@@ -24,20 +24,20 @@ const Menu = {
 		}
 
 		if (Global.varsWindowWidth < 768) {
-			this.$domMenuHasSub.each(function (i, el) {
+			this.$domMenuHasSub.each(function(i, el) {
 				$(el).append('<span class="sub-icon font-plus-circle" data-open-sub></span>');
 			});
 		}
 
 		// bind events
-		this.$domMenuBtn.on('click', function (e) {
+		this.$domMenuBtn.on('click', function(e) {
 			e.preventDefault();
 			Menu.$domMenuBtn.toggleClass(Menu.classOpen);
 			Menu.$domMenuNav.toggleClass(Menu.classOpen);
 			Global.$domBody.toggleClass(Menu.classOpenMenu);
 		});
 
-		this.$domMenuNav.on('click', '[data-open-sub]', function () {
+		this.$domMenuNav.on('click', '[data-open-sub]', function() {
 			if (Global.varsWindowWidth < 768) {
 				$(this).siblings('.sub-menu').slideToggle();
 			}
