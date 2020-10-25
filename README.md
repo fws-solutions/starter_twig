@@ -17,149 +17,92 @@ Install JS dependencies by running [Node.js](https://nodejs.org/en/) package man
 
     npm install
 
-
 ## CLI
 For the full list of all commands, execute `fws --help`.
 
     fws --help
 
+### Creating Components
 
-    #### Creating Template Views
+There are three types of components:
+- Main
+- Blocks
+- Parts
 
-    There are four types of template views:
-    - Blocks
-    - Listings
-    - Parts
-    - Shared
+To create a new view, execute `fws create-file` command and pass `--block` or `--part` with an argument.
 
-    To create a new view, execute `fws create-file` command and pass `--block`, `--listing` or `--part` with an argument.
+    fws create-file block-name --block
+    fws create-file part-name --part
 
-        fws create-file block-name --block
-        fws create-file listing-name --listing
-        fws create-file part-name --part
+Alternatively, it is possible and **recommended** to use short aliases.
 
-    Alternatively, it is possible and **recommended** to use short aliases.
+    fws cf block-name -b
+    fws cf part-name -p
 
-        fws cf block-name -b
-        fws cf listing-name -l
-        fws cf part-name -p
+Note that in this case the option argument is passed with one '-' instead of two '--'.
 
-    Note that in this case the option argument is passed with one '-' instead of two '--'.
+This command will create new module files in appropriate directory `src/components/blocks`or `src/components/parts`:
+* .twig
+* .scss
+* .json
 
-    This command will create new module files in appropriate directory `template-views/blocks`, `template-views/listings` or `template-views/parts`:
-    * .php
-    * .scss
+It will also update appropriate scss file `_blocks.scss` or `_parts.scss` in `src/assets/scss/layout` directory.
 
-    It will also update appropriate scss file `_blocks.scss`, `_listings.scss` or `_parts.scss` in `src/scss/layout` directory.
+**Note:** There are no CLI commends for creating Main type components.
 
-    **Note:** There are no CLI commends for creating Shared type template views.
+### SVG Icons
 
-    #### Deleting PHP Frontend Template Views
+To generate SVG icons, execute `fws icons` task.
 
-    Once done with FE development phase, it is required to delete all FE components from `template-views` directory.
+    fws icons
 
-    To remove them all, , execute `fws remove-fe`
+This command will optimize all SVG files in `src/assets/svg` directory directory.
 
-        fws remove-fe
+#### PHP Usage
 
-    Alternatively, it is possible and **recommended** to use short aliases.
+Use `inlineSVG` render function to import a SVG file as an inline element in any template.
 
-        fws rfe
+Use the function as shown in this example:
 
-    This command will delete all `.php` files in appropriate directory `template-views/blocks` or `template-views/parts` with `_fe-` prefix.
+ `fws()->render()->inlineSVG('ico-happy', 'banner__caption-icon')`.
 
-    ### Working with Vue Compontents
+The function takes two arguments:
 
-    #### Creating Vue Components
-
-    To create a new Vue component, execute `fws creates files` command and pass `--block-vue` or `--part-vue` with an argument.
-
-        fws create-file block-name --block-vue
-        fws create-file part-name --part-vue
-
-    Alternatively, it is possible and **recommended** to use short aliases.
-
-        fws cf block-name -B
-        fws cf part-name -P
-
-    Note that in this case the option argument is passed with one '-' instead of two '--'.
-
-    This command will create new module file in appropriate directory `src/vue/components/blocks` or `src/vue/components/parts`:
-    * .vue
-
-    #### Naming Conventions
-
-    Naming convention for Vue files should be as follows:
-    - each component should be named using PascalCase format,
-    - each block component should have a prefix 'Block',
-    - each part component should have a prefix 'Part'.
-
-    It is essential to keep in mind these rules when creating the files manually.
-
-    When using `create-file` or `cf` command, these rules will be applied automatically.
-
-        Example:
-        fws create-file team --block-vue
-
-        or short:
-        fws cf team -B
-
-        Will create:
-        src/vue/components/blocks/BlockTeam.vue
-
-    ### SVG Icons
-
-    To generate SVG icons, execute `fws icons` task.
-
-        fws icons
-
-    This command will optimize all SVG files in `src/assets/svg` directory directory.
-
-    #### PHP Usage
-
-    Use `inlineSVG` render function to import a SVG file as an inline element in any template.
-
-    Use the function as shown in this example:
-
-     `fws()->render()->inlineSVG('ico-happy', 'banner__caption-icon')`.
-
-    The function takes two arguments:
-
-    - First argument is a name of a file.
-    - Second argument are additional classes.
+- First argument is a name of a file.
+- Second argument are additional classes.
 
 
-        Example:
-        <?php echo fws()->render()->inlineSVG('ico-happy', 'banner__caption-icon'); ?>
+    Example:
+    <?php echo fws()->render()->inlineSVG('ico-happy', 'banner__caption-icon'); ?>
 
-        Will render:
-        <span class="banner__caption-icon svg-icon">
-            <svg>...</svg>
-        </span>
+    Will render:
+    <span class="banner__caption-icon svg-icon">
+        <svg>...</svg>
+    </span>
 
-    #### SCSS Usage
-    Use `svg-icon-data($icon, $color, $insert: before)` mixin to create **pseudo** element, converte an SVG file to **Base64 encoding** and set it as a **background image**.
+#### SCSS Usage
+Use `svg-icon-data($icon, $color, $insert: before)` mixin to create **pseudo** element, converte an SVG file to **Base64 encoding** and set it as a **background image**.
 
-    The mixing takes three arguments:
+The mixing takes three arguments:
 
-    - First argument is a name of a file.
-    - Second argument is a color of an icon.
-    - Third argument is whether psuedo element should be `::before` or `::after`. The default value is `::before`.
+- First argument is a name of a file.
+- Second argument is a color of an icon.
+- Third argument is whether psuedo element should be `::before` or `::after`. The default value is `::before`.
 
 
-        Example:
-        @include svg-icon-data(ico-happy, $red);
+    Example:
+    @include svg-icon-data(ico-happy, $red);
 
-        Will render:
-        ::before {
-            content: '';
-            display: inline-block;
-            font-size: 1em;
-            width: 1em;
-            height: 1em;
-            background: url("data:image/svg+xml...") no-repeat center
-            background-size: contain;
-        }
+    Will render:
+    ::before {
+        content: '';
+        display: inline-block;
+        font-size: 1em;
+        width: 1em;
+        height: 1em;
+        background: url("data:image/svg+xml...") no-repeat center
+        background-size: contain;
+    }
 
 
 ### Building Files
