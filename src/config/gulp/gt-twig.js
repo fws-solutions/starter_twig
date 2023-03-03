@@ -9,21 +9,22 @@ const data = require('gulp-data');
 const prettify = require('gulp-html-prettify');
 const clean = require('gulp-clean');
 const rename = require('gulp-rename');
-const htmlValidator = require('gulp-w3c-html-validator');
+const { htmlValidator } = require('gulp-w3c-html-validator');
+const validator = require('gulp-html');
 const globalVars = require('./_global-vars');
 
 /*----------------------------------------------------------------------------------------------
 	TWIG
  ----------------------------------------------------------------------------------------------*/
-const ComponentData = function(prop, src) {
+const ComponentData = function (prop, src) {
 	this.prop = prop;
 	this.src = src;
 };
 
 ComponentData.prototype = {
-	addOverrides: function() {
+	addOverrides: function () {
 		this.overrides = {};
-	}
+	},
 };
 
 function checkForIncludedJson(object) {
@@ -34,7 +35,9 @@ function checkForIncludedJson(object) {
 			const propIncl = '>>';
 
 			if (innerObject[propIncl]) {
-				const inclData = JSON.parse(fs.readFileSync(`./src/components/${innerObject[propIncl]}`));
+				const inclData = JSON.parse(
+					fs.readFileSync(`./src/components/${innerObject[propIncl]}`)
+				);
 				// check if component has included json
 				checkForIncludedJson(inclData);
 				object[prop] = inclData;
@@ -63,8 +66,7 @@ function checkForIncludedJson(object) {
 gulp.task('clean-html', cleanHTML);
 
 function cleanHTML() {
-	return gulp.src('dist/**/*.html', {read: false})
-		.pipe(clean());
+	return gulp.src('dist/**/*.html', { read: false }).pipe(clean());
 }
 
 // build twig files
@@ -73,59 +75,69 @@ gulp.task('twig', compileTWIG);
 const twigSRC = ['./src/pages/**/*.twig'];
 
 function compileTWIG() {
-	return gulp.src(twigSRC)
+	return gulp
+		.src(twigSRC)
 		.pipe(plumber())
-		.pipe(data(function(file) {
-			const src = './src/';
-			const dir = path.relative('./src/', file.path).split(path.sep).slice(0, -1).join('/');
-			const name = path.basename(file.path).replace('.twig', '') + '.json';
-			const fileSrc = src + dir + '/' + name;
-			const fileData = JSON.parse(fs.readFileSync(fileSrc));
-			const includedJson = checkForIncludedJson(fileData);
+		.pipe(
+			data(function (file) {
+				const src = './src/';
+				const dir = path
+					.relative('./src/', file.path)
+					.split(path.sep)
+					.slice(0, -1)
+					.join('/');
+				const name =
+					path.basename(file.path).replace('.twig', '') + '.json';
+				const fileSrc = src + dir + '/' + name;
+				const fileData = JSON.parse(fs.readFileSync(fileSrc));
+				const includedJson = checkForIncludedJson(fileData);
 
-			// check if there's included data in json
-			if (includedJson.length > 0) {
-				includedJson.forEach(function(cur) {
-					const data = JSON.parse(fs.readFileSync(cur.src));
+				// check if there's included data in json
+				if (includedJson.length > 0) {
+					includedJson.forEach(function (cur) {
+						const data = JSON.parse(fs.readFileSync(cur.src));
 
-					// check if there are override properties for included data
-					if (cur.overrides) {
-						for (const prop in cur.overrides) {
-							if (cur.overrides.hasOwnProperty(prop)) {
-								data[prop] = cur.overrides[prop];
+						// check if there are override properties for included data
+						if (cur.overrides) {
+							for (const prop in cur.overrides) {
+								if (cur.overrides.hasOwnProperty(prop)) {
+									data[prop] = cur.overrides[prop];
+								}
 							}
 						}
-					}
 
-					fileData[cur.prop] = data;
-				});
-			}
+						fileData[cur.prop] = data;
+					});
+				}
 
-			return fileData;
-		}))
+				return fileData;
+			})
+		)
 		.pipe(twig())
-		.on('error', function(err) {
+		.on('error', function (err) {
 			process.stderr.write(err.message + '\n');
 			this.emit('end');
 		})
-		.pipe(gulpif(globalVars.productionBuild, prettify({indent_char: '	', indent_size: 1})))
+		.pipe(
+			gulpif(
+				globalVars.productionBuild,
+				prettify({ indent_char: '	', indent_size: 1 })
+			)
+		)
 		.pipe(print())
 		.pipe(gulp.dest('dist'));
 }
 
+function validateHtml() {
+	return gulp.src('dist/**/*.html').pipe(validator());
+}
 
 // Tasks
 gulp.task('validate-html', validateHtml);
 
-function validateHtml() {
-	return gulp.src('dist/**/*.html')
-		.pipe(htmlValidator())
-		.pipe(htmlValidator.reporter());
-}
-
 // export tasks
 module.exports = {
-	compileTWIG: compileTWIG,
-	cleanHTML: cleanHTML,
-	validateHtml: validateHtml
+	compileTWIG,
+	cleanHTML,
+	validateHtml,
 };

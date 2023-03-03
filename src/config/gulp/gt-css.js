@@ -1,7 +1,7 @@
 const gulp = require('gulp');
 const plumber = require('gulp-plumber');
 const postcss = require('gulp-postcss');
-const sass = require('gulp-sass');
+const sass = require('gulp-sass')(require('sass'));
 const sassLint = require('gulp-sass-lint');
 const flexBugsFix = require('postcss-flexbugs-fixes');
 const sourcemaps = require('gulp-sourcemaps');
@@ -20,14 +20,21 @@ gulp.task('sass-lint', sasslint);
 
 function css() {
 	const processors = [
-		autoprefixer({overrideBrowserslist: ['last 2 versions', 'ios >= 8']}),
-		flexBugsFix
+		autoprefixer({ overrideBrowserslist: ['last 2 versions', 'ios >= 8'] }),
+		flexBugsFix,
 	];
 
-	return gulp.src(sassSRC)
+	return gulp
+		.src(sassSRC)
 		.pipe(plumber(globalVars.msgERROR))
 		.pipe(sourcemaps.init())
-		.pipe(sass({outputStyle: globalVars.productionBuild ? 'compressed' : 'expanded'}))
+		.pipe(
+			sass({
+				outputStyle: globalVars.productionBuild
+					? 'compressed'
+					: 'expanded',
+			})
+		)
 		.pipe(postcss(processors))
 		.pipe(rename('style.min.css'))
 		.pipe(sourcemaps.write('.'))
@@ -35,15 +42,18 @@ function css() {
 }
 
 function sasslint() {
-	return gulp.src(sassSRC)
-		.pipe(sassLint({
-			config: '.sass-lint.yml'
-		}))
+	return gulp
+		.src(sassSRC)
+		.pipe(
+			sassLint({
+				config: '.sass-lint.yml',
+			})
+		)
 		.pipe(sassLint.format())
 		.pipe(sassLint.failOnError());
 }
 
 // export tasks
 module.exports = {
-	css: css
+	css: css,
 };

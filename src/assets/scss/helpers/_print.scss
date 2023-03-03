@@ -9,7 +9,8 @@
 		padding: 0;
 		text-align: left;
 	}
-	a:link, a:visited {
+	a:link,
+	a:visited {
 		background: #fff;
 		color: #000;
 		text-decoration: underline;
@@ -17,7 +18,12 @@
 	a:not([href="javascript:;"])::after {
 		content: " [" attr(href) "] ";
 	}
-	h1, h2, h3, h4, h5, h6 {
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
 		background: none;
 		color: #000;
 	}
